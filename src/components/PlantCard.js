@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 
 function PlantCard({ plant }) {
   // Add logic to check if plant is in stock and render appropriate button
-  const inStock = true;
+  const [inStock, setInStock] = useState(true);
   function handleClick() {
-    inStock = !inStock;
+    setInStock( () => !inStock );
   }
 
   return (
