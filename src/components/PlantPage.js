@@ -4,6 +4,7 @@ import PlantList from "./PlantList";
 import Search from "./Search";
 
 function PlantPage() {
+  const [refreshToggle, setRefreshToggle] = useState(false);
 //fetch plants, add state?
 const [plants, setPlants] = useState([]);
 useEffect(() => {
@@ -11,13 +12,19 @@ useEffect(() => {
   .then((r) => r.json())
   .then((data) => setPlants(data))
   //console.log("ran")
-}, []);
+}, [refreshToggle]);
+
+function handleNewPlant(newP) {
+  setPlants([...plants, newP]);
+
+  setRefreshToggle(() => !refreshToggle);
+}
 
 
 
   return (
     <main>
-      <NewPlantForm />
+      <NewPlantForm onAddNewPlant={handleNewPlant}/>
       <Search />
       <PlantList plants={plants}/>
     </main>

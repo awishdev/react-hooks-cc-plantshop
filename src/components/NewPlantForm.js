@@ -2,9 +2,9 @@ import React, {useState,useEffect} from "react";
 
 function NewPlantForm({onAddNewPlant}) {
   const [formData, setFormData] = useState({
-    name: "",
-    image: "",
-    price: 0
+    name: '',
+    image: '',
+    price: ''
   });
 
   
@@ -20,7 +20,7 @@ function NewPlantForm({onAddNewPlant}) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const newPlant = {
+    const newPl = {
       name: formData.name,
       image: formData.image,
       price: formData.price
@@ -29,9 +29,9 @@ function NewPlantForm({onAddNewPlant}) {
     fetch("http://localhost:6001/plants", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "Application/JSON",
       },
-      body: JSON.stringify(newPlant),
+      body: JSON.stringify(newPl),
     })
       .then((r) => r.json())
       .then((newP) => onAddNewPlant(newP))
