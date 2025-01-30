@@ -4,7 +4,7 @@ function NewPlantForm({onAddNewPlant}) {
   const [formData, setFormData] = useState({
     name: '',
     image: '',
-    price: ''
+    price: 0
   });
 
   

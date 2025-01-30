@@ -5,6 +5,7 @@ import Search from "./Search";
 
 function PlantPage() {
   const [refreshToggle, setRefreshToggle] = useState(false);
+  const [search, setSearch] = useState("");
 //fetch plants, add state?
 const [plants, setPlants] = useState([]);
 useEffect(() => {
@@ -18,15 +19,18 @@ function handleNewPlant(newP) {
   setPlants([...plants, newP]);
 
   setRefreshToggle(() => !refreshToggle);
-}
+};
 
+function handleSearch(searchTerm){
+  setSearch(searchTerm);
+};
 
 
   return (
     <main>
       <NewPlantForm onAddNewPlant={handleNewPlant}/>
-      <Search />
-      <PlantList plants={plants}/>
+      <Search handleSearch={handleSearch} search={search}/>
+      <PlantList plants={plants} search={search}/>
     </main>
   );
 }
