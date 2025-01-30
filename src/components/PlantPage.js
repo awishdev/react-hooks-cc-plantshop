@@ -24,13 +24,16 @@ function handleNewPlant(newP) {
 function handleSearch(searchTerm){
   setSearch(searchTerm);
 };
+function handleRefresh() {
+  setRefreshToggle(() => !refreshToggle);
+}
 
 
   return (
     <main>
       <NewPlantForm onAddNewPlant={handleNewPlant}/>
       <Search handleSearch={handleSearch} search={search}/>
-      <PlantList plants={plants} search={search}/>
+      <PlantList plants={plants} search={search} handleRefresh={handleRefresh}/>
     </main>
   );
 }
