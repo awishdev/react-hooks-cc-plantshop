@@ -4,7 +4,6 @@ import PlantList from "./PlantList";
 import Search from "./Search";
 
 function PlantPage() {
-  const [refreshToggle, setRefreshToggle] = useState(false);
   const [search, setSearch] = useState("");
 //fetch plants, add state?
 const [plants, setPlants] = useState([]);
@@ -13,19 +12,25 @@ useEffect(() => {
   .then((r) => r.json())
   .then((data) => setPlants(data))
   //console.log("ran")
-}, [refreshToggle]);
+},[]);
 
 function handleNewPlant(newP) {
   setPlants([...plants, newP]);
 
-  setRefreshToggle(() => !refreshToggle);
+  
 };
 
 function handleSearch(searchTerm){
   setSearch(searchTerm);
 };
-function handleRefresh() {
-  setRefreshToggle(() => !refreshToggle);
+function handleDeletePlant(id) {
+  const updatedPlants = plants.filter((plant) => plant.id !== id);
+  setPlants(updatedPlants);
+
+}
+function handlePriceUpdate(id, newPrice) {
+  const updatedPlants = plants.map((plant) => plant.id === id? {...plant, price: newPrice} : plant);
+  setPlants(updatedPlants);
 }
 
 
@@ -33,7 +38,7 @@ function handleRefresh() {
     <main>
       <NewPlantForm onAddNewPlant={handleNewPlant}/>
       <Search handleSearch={handleSearch} search={search}/>
-      <PlantList plants={plants} search={search} handleRefresh={handleRefresh}/>
+      <PlantList plants={plants} search={search} handleDeletePlant={handleDeletePlant} handlePriceUpdate={handlePriceUpdate}/>
     </main>
   );
 }

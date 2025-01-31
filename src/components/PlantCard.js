@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function PlantCard({ plant, handleRefresh }) {
+function PlantCard({ plant, handleDeletePlant, handlePriceUpdate }) {
   // Add logic to check if plant is in stock and render appropriate button
   const [inStock, setInStock] = useState(true);
   const [newPrice, setNewPrice] = useState(0);
@@ -14,7 +14,7 @@ function PlantCard({ plant, handleRefresh }) {
     })
       .then((r) => r.json())
       .then(() => {
-        handleRefresh();
+        handleDeletePlant(plant.id);
       });
   }
   function handlePriceChange(e) {
@@ -31,8 +31,9 @@ function PlantCard({ plant, handleRefresh }) {
     })
      .then((r) => r.json())
      .then(() => {
+        handlePriceUpdate(plant.id, newPrice);
         setNewPrice(0);
-        handleRefresh();
+
       });
   }
 
